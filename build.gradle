@@ -10,7 +10,7 @@ apply plugin: 'eclipse'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-mainClassName = "hello.HelloWorld"
+mainClassName = "org.ansoya.drugs.drugs.DrugsApplication"
 
 buildscript {
     ext {
