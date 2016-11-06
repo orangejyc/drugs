@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 public class RestPasswordController {
-    @RequestMapping("restPassword")
+    @RequestMapping("showRestPassword")
     public void showRestPassword(HttpServletRequest request, HttpServletResponse response){
         //TODO 响应重置密码界面
     }
