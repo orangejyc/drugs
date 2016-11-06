@@ -15,6 +15,7 @@ import org.ansoya.drugs.drugs.entity.Result;
 import org.ansoya.drugs.drugs.entity.Results;
 import org.ansoya.drugs.drugs.entity.User;
 import org.ansoya.drugs.drugs.service.PayOrderService;
+import org.ansoya.drugs.drugs.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -206,34 +207,12 @@ public class AppController {
                 Double fee = mAmount * num;
                 totalFee = fee.intValue();
             }
-            String orderInfo = payOrderService.pay(totalFee, "wxPayOrder-" + type + System.currentTimeMillis(), "扫码服务购买", getIpAddr(request), "CNY");
+            String orderInfo = payOrderService.pay(totalFee, "wxPayOrder-" + type + System.currentTimeMillis(), "扫码服务购买", Utils.getIpAddr(request), "CNY");
             return result;
         } catch (Throwable throwable) {
             result = Results.newFailedResult("生成微信支付订单失败!" + throwable.getMessage());
             log.error(result.getStatusText(), throwable);
             return result;
-        }
-    }
-
-
-
-
-    private String getIpAddr(HttpServletRequest request) {
-        String ip = request.getHeader("X-Real-IP");
-        if (!Strings.isNullOrEmpty(ip) && !"unknown".equalsIgnoreCase(ip)) {
-            return ip;
-        }
-        ip = request.getHeader("X-Forwarded-For");
-        if (!Strings.isNullOrEmpty(ip) && !"unknown".equalsIgnoreCase(ip)) {
-// 多次反向代理后会有多个IP值，第一个为真实IP。
-            int index = ip.indexOf(',');
-            if (index != -1) {
-                return ip.substring(0, index);
-            } else {
-                return ip;
-            }
-        } else {
-            return request.getRemoteAddr();
         }
     }
 
