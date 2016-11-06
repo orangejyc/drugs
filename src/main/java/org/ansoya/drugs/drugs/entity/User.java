@@ -4,6 +4,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Getter
@@ -18,4 +19,9 @@ public class User {
     private Date regTime;
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date expirationTime;
+
+
+    public String  getExpirationTimeString(){
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(expirationTime);
+    }
 }

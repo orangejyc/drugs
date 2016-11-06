@@ -148,7 +148,7 @@ public class AppController {
 
     @RequestMapping(path = "forgetPassword", method = RequestMethod.POST)
     @ResponseBody
-    public Result<Boolean> forgetPwd(@RequestParam("account") String account, @RequestParam("email") String email, @RequestParam("phone") String phone) {
+    public Result<Boolean> forgetPwd(@RequestParam("account") String account, @RequestParam("email") String email) {
         Result<Boolean> result = Results.newFailedResult(DrugsConstants.OPER_FAILD);
         try {
             return Results.newSuccessResult("重置邮件已发送到您的邮箱，请查收邮件");
@@ -214,6 +214,8 @@ public class AppController {
             return result;
         }
     }
+
+
 
 
     private String getIpAddr(HttpServletRequest request) {

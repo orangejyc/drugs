@@ -15,6 +15,9 @@ public class NotifyController {
     @RequestMapping("notify")
     @ResponseBody
     public String notify(@RequestParam(value = "return_code", required = true) String return_code, @RequestParam(value = "return_msg", required = false) String return_msg) {
+        // TODO 更新到期时间
+        // TODO 响应淘宝
+
         return "<xml>" +
                 "  <return_code><![CDATA[SUCCESS]]></return_code>" +
                 "  <return_msg><![CDATA[OK]]></return_msg>" +
