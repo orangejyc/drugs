@@ -57,7 +57,7 @@ public class PayOrderService {
         packageParameter.put("body", des);
         packageParameter.put("mch_id", wxPayConfiguration.getMchId());
         packageParameter.put("notify_url", wxPayConfiguration.getNotifyUrl());
-        packageParameter.put("nonce_str", nstr);
+        packageParameter.put("nonce_str", nstr+"1234");
         packageParameter.put("out_trade_no", tradeNo);
         packageParameter.put("total_fee", String.valueOf(totalFee));
         packageParameter.put("spbill_create_ip", clientIp);

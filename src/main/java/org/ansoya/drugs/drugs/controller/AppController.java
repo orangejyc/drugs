@@ -164,20 +164,24 @@ public class AppController {
     @ResponseBody
     public Result<?> qrUpload(@RequestParam("uid") String uid, @RequestParam("qr") String qr, @RequestParam("qrcharset") String qrcharset) {
         Result<?> result = Results.newFailedResult(DrugsConstants.OPER_FAILD);
+        log.info("接收到qr:" + qr);
         String message = "";
         try {
             if (Strings.isNullOrEmpty(qrcharset)) {
                 qrcharset = "UTF-8";
             }
-            message = new String(qr.getBytes("ISO8859-1"), qrcharset);
-            //msg=new String(qr.getBytes(),"GBK");
-            log.info("接收到qr:" + qr);
+            //message = new String(qr.getBytes("ISO8859-1"), qrcharset);
+            message = new String(qr.getBytes("UTF-8"), qrcharset);
+            //message = new String(qr.getBytes(), "ISO8859-1");
+            log.info("转码后:" + message);
+
             FormClient formClient = FormClientHolder.getFormClientBySik(uid);
+
             if (null == formClient) {
                 return Results.newFailedResult(message, "上传二维码扫描结果失败,该用户未登录电脑客户端");
             }
             formClient.handle(message);
-            log.info(result.toJson());
+            log.info("响应结果:["+result.toJson()+"]");
             return Results.newSuccessResult(message, "上传二维码扫描结果成功");
 
         } catch (Throwable t) {

@@ -32,7 +32,7 @@ public class UserDao {
     public String insert(User user) {
         String uid = UUID.randomUUID().toString();
 
-        StringBuilder sl = new StringBuilder("insert into drugs_user(uid, account,pwd, email,phone,regTime,expirationTime)values(:uid, :pwd, :account, :email,:phone,:regTime,:expirationTime)");
+        StringBuilder sl = new StringBuilder("insert into drugs_user(uid, account,pwd, email,phone,regTime,expirationTime)values(:uid,:account, :pwd,  :email,:phone,:regTime,:expirationTime)");
         //sl.append(UUID.randomUUID().toString());
         try (Connection con = getSql2o().open()) {
             con.createQuery(sl.toString())
